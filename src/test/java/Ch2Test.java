@@ -73,20 +73,24 @@ public class Ch2Test {
         list.partitionAround(5);
 
         CustomizedLinkedList<Integer> expected = new CustomizedLinkedList<>();
-        list.add(3);
-        list.add(2);
-        list.add(1);
-        list.add(5);
-        list.add(5);
-        list.add(8);
-        list.add(10);
+        expected.add(3);
+        expected.add(2);
+        expected.add(1);
+        expected.add(5);
+        expected.add(5);
+        expected.add(8);
+        expected.add(10);
 
         Node<Integer> ptr1 = list.getHead().next;
         Node<Integer> ptr2 = expected.getHead().next;
+
+        list.printList();
+        System.out.println();
+        expected.printList();
         while (ptr1.next != null) {
             Assertions.assertEquals(ptr2.data, ptr1.data);
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
         }
     }
-
-
 }

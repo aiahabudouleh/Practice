@@ -4,27 +4,14 @@ import java.util.HashSet;
 
 public class CustomizedLinkedList<T> {
 
-    private Node<T> head = new Node<>();
+    private Node<T> head = new Node<>(null);
+    private  Node<T> tail = head;
     private int length;
 
     public void add(T data) {
-        Node<T> ptr = head;
-        while(ptr.next != null) {
-            ptr = ptr.next;
-        }
-        length++;
-        ptr.next = new Node(data);
-    }
-
-    public void add(Node node) {
-        Node<T> ptr = head;
-        while(ptr.next != null) {
-            ptr = ptr.next;
-        }
-        ptr.next = node;
-        while (ptr.next != null) {
-            length++;
-        }
+        this.tail.next = new Node(data);
+        this.tail = tail.next;
+        this.length++;
     }
 
     public int length() {
@@ -32,7 +19,7 @@ public class CustomizedLinkedList<T> {
     }
 
     public Node<T> getHead() {
-        return head.next;
+        return head;
     }
 
     public void removeDuplicates() {
@@ -62,7 +49,74 @@ public class CustomizedLinkedList<T> {
     }
 
     public void partitionAround(T x) {
+       Node<T> beforeStart = null;
+       Node<T> beforeEnd = null;
+       Node<T> afterStart = null;
+       Node<T> afterEnd = null;
 
+       Node<T> ptr = head.next;
+       while(ptr != null) {
+           if (ptr.data.hashCode() < x.hashCode()) {
+               if (beforeStart == null) {
+                   beforeStart = new Node<>(ptr.data);
+                   beforeEnd = beforeStart;
+               } else {
+                   beforeEnd.next = new Node(ptr.data);
+                   beforeEnd = beforeEnd.next;
+               }
+
+           } else if (ptr.data.hashCode() > x.hashCode()) {
+               if (afterStart == null) {
+                   afterStart = new Node<>(ptr.data);
+                   afterEnd = afterStart;
+               } else {
+                   afterEnd.next = new Node(ptr.data);
+                   afterEnd = afterEnd.next;
+               }
+
+           } else {
+               if (afterStart == null) {
+                   afterStart = new Node<>(ptr.data);
+                   afterEnd = afterStart;
+               } else {
+                   afterEnd.next = new Node<>(ptr.data);
+                   afterEnd = afterEnd.next;
+               }
+           }
+
+           ptr = ptr.next;
+       }
+
+        if (afterStart == null ) {
+            this.head.next = afterStart;
+            this.tail = afterEnd;
+            return;
+        }
+        if (afterEnd != null) {
+            beforeEnd.next = afterStart;
+            this.head.next = beforeStart;
+            this.tail = afterEnd;
+            return;
+        }
+
+
+    }
+
+    private void addAllToEndOfList(CustomizedLinkedList<T> otherList) {
+        this.tail.next = otherList.head.next;
+        otherList.head = null;
+        while(this.tail.next != null) {
+            this.tail = this.tail.next;
+        }
+        this.length += otherList.length;
+    }
+
+    public void printList() {
+        Node<T> ptr = head.next;
+        while (ptr != null) {
+            System.out.print(ptr.data + " ");
+            ptr = ptr.next;
+        }
     }
 
 
