@@ -19,7 +19,7 @@ public class CustomizedLinkedList<T> {
     }
 
     public Node<T> getHead() {
-        return head;
+        return head.next;
     }
 
     public void removeDuplicates() {
@@ -102,14 +102,6 @@ public class CustomizedLinkedList<T> {
 
     }
 
-    private void addAllToEndOfList(CustomizedLinkedList<T> otherList) {
-        this.tail.next = otherList.head.next;
-        otherList.head = null;
-        while(this.tail.next != null) {
-            this.tail = this.tail.next;
-        }
-        this.length += otherList.length;
-    }
 
     public void printList() {
         Node<T> ptr = head.next;

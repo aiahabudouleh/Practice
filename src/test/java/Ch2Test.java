@@ -1,3 +1,4 @@
+import ch2.CH2;
 import ch2.CustomizedLinkedList;
 import ch2.Node;
 import org.junit.jupiter.api.Assertions;
@@ -92,5 +93,20 @@ public class Ch2Test {
             ptr1 = ptr1.next;
             ptr2 = ptr2.next;
         }
+    }
+
+    @Test
+    public void q5_test() {
+        CustomizedLinkedList<Integer> list1 = new CustomizedLinkedList<>();
+        list1.add(9);
+        list1.add(9);
+        list1.add(9);
+
+        CustomizedLinkedList<Integer> list2 = new CustomizedLinkedList<>();
+        list2.add(1);
+        list2.add(1);
+        list2.add(1);
+
+        CH2.q5(list1, list2);
     }
 }
