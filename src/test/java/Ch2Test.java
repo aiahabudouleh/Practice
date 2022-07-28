@@ -109,4 +109,22 @@ public class Ch2Test {
 
         CH2.q5(list1, list2);
     }
+
+    @Test
+    public void q6_test() {
+        CustomizedLinkedList<Integer> list = new CustomizedLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Assertions.assertEquals(false, list.isPalindrome());
+
+        CustomizedLinkedList<Integer> list1 = new CustomizedLinkedList<>();
+        list1.add(1);
+        list1.add(2);
+        list1.add(1);
+        Assertions.assertEquals(true, list1.isPalindrome());
+
+
+
+    }
 }

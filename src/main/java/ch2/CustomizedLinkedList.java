@@ -14,6 +14,12 @@ public class CustomizedLinkedList<T> {
         this.length++;
     }
 
+    public void addToBegining(T data) {
+        Node<T> node = new Node<>(data);
+        node.next = head.next;
+        head.next = node;
+    }
+
     public int length() {
         return length;
     }
@@ -109,7 +115,36 @@ public class CustomizedLinkedList<T> {
             System.out.print(ptr.data + " ");
             ptr = ptr.next;
         }
+        System.out.println();
     }
+
+    public boolean isPalindrome() {
+        CustomizedLinkedList<T> reversed = reverseAndClone();
+        Node<T> ptr1 = reversed.getHead();
+        Node<T> ptr2 = this.getHead();
+
+        while (ptr1 != null && ptr2 != null) {
+            if (!ptr1.data.equals(ptr2.data)) {
+                return false;
+            }
+            ptr1= ptr1.next;
+            ptr2 = ptr2.next;
+        }
+
+        return ptr1 == null && ptr2 == null;
+    }
+
+    public CustomizedLinkedList<T> reverseAndClone() {
+        CustomizedLinkedList<T> reveresList = new CustomizedLinkedList<>();
+        Node<T> ptr = head.next;
+        while(ptr != null) {
+            reveresList.addToBegining(ptr.data);
+            ptr = ptr.next;
+        }
+        return reveresList;
+    }
+
+
 
 
 }

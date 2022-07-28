@@ -19,14 +19,14 @@ public class CH2 {
     }
 
     public static void q5(CustomizedLinkedList<Integer> list1, CustomizedLinkedList<Integer> list2) {
-        Node<Integer> sumHead = q5_helper(list1.getHead(), list2.getHead(), 0);
+        Node<Integer> sumHead = reverseSummation(list1.getHead(), list2.getHead(), 0);
         while (sumHead != null) {
             System.out.print(sumHead.data + " ");
             sumHead = sumHead.next;
         }
     }
 
-    private static Node<Integer> q5_helper(Node<Integer> ptr1, Node<Integer> ptr2, int carry) {
+    private static Node<Integer> reverseSummation(Node<Integer> ptr1, Node<Integer> ptr2, int carry) {
         if (ptr1 == null && ptr2 == null && carry == 0) {
             return null;
         }
@@ -40,7 +40,7 @@ public class CH2 {
         }
         Node<Integer> result = new Node<>(value % 10);
         if (ptr1 != null || ptr2 != null) {
-            result.next = q5_helper(ptr1 != null ? ptr1.next : null, ptr2 != null ? ptr2.next : null, value / 10);
+            result.next = reverseSummation(ptr1 != null ? ptr1.next : null, ptr2 != null ? ptr2.next : null, value / 10);
         }
         return result;
     }
