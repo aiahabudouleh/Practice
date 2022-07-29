@@ -14,6 +14,18 @@ public class CustomizedLinkedList<T> {
         this.length++;
     }
 
+    public void add(Node<T> node) {
+        this.tail.next = node;
+        this.length++;
+        this.tail = tail.next;
+
+        while (node.next != null) {
+            this.length++;
+            this.tail = tail.next;
+            node = node.next;
+        }
+    }
+
     public void addToBegining(T data) {
         Node<T> node = new Node<>(data);
         node.next = head.next;
@@ -142,6 +154,36 @@ public class CustomizedLinkedList<T> {
             ptr = ptr.next;
         }
         return reveresList;
+    }
+
+    public static<T> Node<T> intersectionFinder1(CustomizedLinkedList<T> list1, CustomizedLinkedList<T> list2){
+        int LengthDifference = Math.abs(list1.length - list2.length);
+        CustomizedLinkedList<T> longer = list1.length >= list2.length
+                ? list1
+                : list2;
+        CustomizedLinkedList<T> shorter = list1.length >= list2.length
+                ? list2
+                : list1;
+        Node<T> longerListPtr = getKthNodeFromHead(longer, LengthDifference);
+        Node<T> shorterListPtr = shorter.getHead();
+        while (longerListPtr != null && shorterListPtr != null && shorterListPtr != longerListPtr) {
+            longerListPtr = longerListPtr.next;
+            shorterListPtr = shorterListPtr.next;
+        }
+
+        return longer.tail == shorter.tail ? longerListPtr : null;
+    }
+
+    private static<T>  Node<T> getKthNodeFromHead(CustomizedLinkedList<T> list, int k) {
+        if (k > list.length) {
+            return null;
+        }
+        Node<T> ptr = list.getHead();
+        while(k-- > 0 && ptr != null) {
+            ptr = ptr.next;
+        }
+
+        return ptr;
     }
 
 

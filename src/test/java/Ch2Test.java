@@ -124,7 +124,29 @@ public class Ch2Test {
         list1.add(1);
         Assertions.assertEquals(true, list1.isPalindrome());
 
+    }
 
+    @Test
+    public void q7_test() {
+        CustomizedLinkedList<Integer> list1 = new CustomizedLinkedList<>();
+        CustomizedLinkedList<Integer> list2 = new CustomizedLinkedList<>();
 
+        Node<Integer> node1= new Node<>(7);
+        node1.next = new Node(2);
+        node1.next.next = new Node(1);
+
+        list1.add(3);
+        list1.add(1);
+        list1.add(5);
+        list1.add(9);
+
+        list2.add(4);
+        list2.add(6);
+
+        list1.add(node1);
+        list2.add(node1);
+
+        Node<Integer> intersctionNode = list1.intersectionFinder1(list1, list2);
+        Assertions.assertEquals(node1, intersctionNode);
     }
 }
