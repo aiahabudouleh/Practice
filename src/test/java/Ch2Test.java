@@ -4,6 +4,10 @@ import ch2.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static ch2.CustomizedLinkedList.findStartOfCircle;
+import static ch2.CustomizedLinkedList.intersectionFinder1;
+import static ch2.CustomizedLinkedList.isCircular;
+
 public class Ch2Test {
 
     @Test
@@ -146,7 +150,24 @@ public class Ch2Test {
         list1.add(node1);
         list2.add(node1);
 
-        Node<Integer> intersctionNode = list1.intersectionFinder1(list1, list2);
+        Node<Integer> intersctionNode = intersectionFinder1(list1, list2);
         Assertions.assertEquals(node1, intersctionNode);
+    }
+
+    @Test
+    public void q8_test() {
+        CustomizedLinkedList<Integer> list = new CustomizedLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Node<Integer> node = new Node<>(4);
+        node.next = new Node(5);
+        node.next.next = new Node(6);
+        node.next.next.next = new Node(7);
+        node.next.next.next.next = node;
+        list.add(node);
+
+        Assertions.assertEquals(true, isCircular(list));
+        Assertions.assertEquals(node, findStartOfCircle(list));
     }
 }

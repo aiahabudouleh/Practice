@@ -1,6 +1,8 @@
 package ch2;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class CustomizedLinkedList<T> {
 
@@ -19,7 +21,13 @@ public class CustomizedLinkedList<T> {
         this.length++;
         this.tail = tail.next;
 
-        while (node.next != null) {
+        Map<Node<T>, Boolean> isVis = new HashMap<>();
+        isVis.put(node, true);
+        node = node.next;
+        while (node != null) {
+            if (isVis.put(node, true) != null) {
+                break;
+            }
             this.length++;
             this.tail = tail.next;
             node = node.next;
@@ -186,6 +194,47 @@ public class CustomizedLinkedList<T> {
         return ptr;
     }
 
+
+    public static<T> boolean isCircular(CustomizedLinkedList<T> list){
+        Node<T> fastPtr = list.getHead();
+        Node<T> slowPtr = list.getHead();
+
+        while(fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+
+            if (slowPtr == fastPtr) {
+                break;
+            }
+        }
+        if (fastPtr == null || fastPtr.next == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public static <T> Node<T> findStartOfCircle(CustomizedLinkedList<T> list) {
+        Node<T> fastPtr = list.getHead();
+        Node<T> slowPtr = list.getHead();
+
+        while(fastPtr != null && fastPtr.next != null) {
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+            if (slowPtr == fastPtr) {
+                break;
+            }
+        }
+        if (fastPtr == null || fastPtr.next == null) {
+            return null;
+        }
+
+        slowPtr = list.getHead();
+        while(slowPtr != fastPtr) {
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next;
+        }
+        return fastPtr;
+    }
 
 
 
