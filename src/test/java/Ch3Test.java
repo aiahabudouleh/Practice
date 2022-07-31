@@ -1,3 +1,4 @@
+import ch3.MinStack;
 import ch3.Queue;
 import ch3.Stack;
 import ch3.ThreeInOne;
@@ -61,7 +62,22 @@ public class Ch3Test {
         threeInOne.pop(1);
         Assertions.assertEquals(2, threeInOne.peek(1));
 
+    }
 
+    @Test
+    public void test_minStack() {
+        MinStack<Integer> stack = new MinStack<>();
+        stack.push(5);
+        Assertions.assertEquals(5, stack.min());
+        stack.push((2));
+        Assertions.assertEquals(2, stack.min());
+        Assertions.assertEquals(2, stack.peek());
+        stack.push(10);
+        Assertions.assertEquals(2, stack.min());
+        Assertions.assertEquals(10, stack.peek());
+        stack.pop();
+        stack.pop();
+        Assertions.assertEquals(5, stack.min());
 
     }
 }
