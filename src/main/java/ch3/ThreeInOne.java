@@ -16,27 +16,31 @@ public class ThreeInOne {
             throw new IllegalArgumentException();
         }
         confirmStackNumber(stackNumber);
-        int idx = getOffset(stackNumber);
-        values[idx] = value;
         sizes[stackNumber]++;
+        int idx = getTop(stackNumber);
+        values[idx] = value;
     }
 
     public int peek(int stackNumber) {
-        int idx = getLastElementIdx(stackNumber);
+        int idx = getTop(stackNumber);
         return values[idx];
     }
 
     public int pop(int stackNumber) {
-        int value = values[getLastElementIdx(stackNumber)];
+        int value = values[getTop(stackNumber)];
         sizes[stackNumber]--;
         return value;
     }
 
-    private int getLastElementIdx(int stackNumber) {
+    private int getTop(int stackNumber) {
         if (sizes[stackNumber] == 0) {
             throw new NullPointerException();
         }
-        return (capacity * stackNumber) + sizes[stackNumber] - 1;
+        return getOffset(stackNumber) + sizes[stackNumber] - 1;
+    }
+
+    private int getOffset(int stackNumber) {
+        return capacity * stackNumber;
     }
 
     public boolean isEmpty(int stackNumber) {
@@ -48,10 +52,5 @@ public class ThreeInOne {
             throw new IllegalArgumentException();
         }
     }
-
-    private int getOffset(int stackNumber) {
-        return (capacity * (stackNumber + 1)) - sizes[stackNumber] - 1;
-    }
-
 
 }
