@@ -17,16 +17,23 @@ public class Stack<T> {
     }
 
     private Node<T> head = new Node<>();
+    private int size = 0;
 
     public void push(T data) {
         Node<T> node = new Node<>(data);
         node.next = head.next;
         head.next = node;
+        size++;
+    }
+
+    public int size() {
+        return size;
     }
 
     public T pop() {
         T top = getTopElement();
         head.next = head.next == null ? null : head.next.next;
+        size--;
         return top;
     }
 

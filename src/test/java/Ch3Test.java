@@ -1,6 +1,7 @@
 import ch3.MinStack;
 import ch3.Queue;
 import ch3.Stack;
+import ch3.StackOfPlates;
 import ch3.ThreeInOne;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -79,5 +80,24 @@ public class Ch3Test {
         stack.pop();
         Assertions.assertEquals(5, stack.min());
 
+    }
+
+    @Test
+    public void test_stackOfPlates() {
+        StackOfPlates<Integer> plates = new StackOfPlates<>(3);
+        Assertions.assertEquals(true, plates.isEmpty());
+        plates.push(1);
+        plates.push(2);
+        plates.push(3);
+        plates.push(4);
+        plates.push(5);
+        plates.push(6);
+        plates.push(7);
+        plates.push(8);
+
+        Assertions.assertEquals(8, plates.peek());
+        Assertions.assertEquals(8, plates.pop());
+        Assertions.assertEquals(7, plates.pop());
+        Assertions.assertEquals(3, plates.popAt(0));
     }
 }
