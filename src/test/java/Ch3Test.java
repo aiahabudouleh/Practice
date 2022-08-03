@@ -1,6 +1,7 @@
 import ch3.MinStack;
 import ch3.Queue;
 import ch3.QueueViaStack;
+import ch3.SortedStack;
 import ch3.Stack;
 import ch3.StackOfPlates;
 import ch3.ThreeInOne;
@@ -117,5 +118,23 @@ public class Ch3Test {
         Assertions.assertEquals(2, queue.peek());
         Assertions.assertEquals(2, queue.remove());
 
+    }
+
+    @Test
+    public void test_q5() {
+        SortedStack<Integer> sortedStack = new SortedStack();
+        Assertions.assertEquals(true, sortedStack.isEmpty());
+        sortedStack.push(2);
+        sortedStack.push(5);
+        sortedStack.push(3);
+        sortedStack.push(1);
+
+        Assertions.assertEquals(1, sortedStack.peek());
+        Assertions.assertEquals(1, sortedStack.pop());
+        Assertions.assertEquals(2, sortedStack.pop());
+        Assertions.assertEquals(3, sortedStack.pop());
+        Assertions.assertEquals(5, sortedStack.pop());
+
+        Assertions.assertEquals(true, sortedStack.isEmpty());
     }
 }
