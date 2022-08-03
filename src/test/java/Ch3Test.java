@@ -1,3 +1,6 @@
+import ch3.AnimalShelter;
+import ch3.Cat;
+import ch3.Dog;
 import ch3.MinStack;
 import ch3.Queue;
 import ch3.QueueViaStack;
@@ -136,5 +139,19 @@ public class Ch3Test {
         Assertions.assertEquals(5, sortedStack.pop());
 
         Assertions.assertEquals(true, sortedStack.isEmpty());
+    }
+
+    @Test
+    public void test_q6() {
+        AnimalShelter shelter = new AnimalShelter();
+
+        shelter.enqueue(new Cat(1));
+        Assertions.assertNull(shelter.dequeueDog());
+        Assertions.assertEquals(new Cat(1), shelter.dequeueAny());
+
+        shelter.enqueue(new Cat());
+        shelter.enqueue(new Dog(3L));
+        Assertions.assertEquals(new Dog(3L), shelter.dequeueDog());
+
     }
 }
