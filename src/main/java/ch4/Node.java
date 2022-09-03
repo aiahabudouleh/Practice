@@ -35,6 +35,10 @@ public class Node<T> {
         return this.value;
     }
 
+    public Integer getDataAsInt() {
+        return Integer.parseInt(this.value.toString());
+    }
+
     @Override
     public String toString() {
         return getData().toString();

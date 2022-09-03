@@ -7,6 +7,7 @@ import java.util.List;
 
 import static ch4.Ch4.createListOfDepths;
 import static ch4.Ch4.createMinimalTree;
+import static ch4.Ch4.isBST;
 import static ch4.Ch4.isBalanced;
 import static ch4.Ch4.printInOrder;
 
@@ -40,5 +41,12 @@ public class Ch4Test {
         root = createMinimalTree(arr);
         Assertions.assertEquals(true, isBalanced(root));
 
+    }
+
+    @Test
+    public void testIsBST() {
+        int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7};
+        Node root = createMinimalTree(arr);
+        Assertions.assertEquals(true, isBST(root));
     }
 }

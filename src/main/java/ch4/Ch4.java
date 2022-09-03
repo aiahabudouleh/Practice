@@ -110,4 +110,26 @@ public class Ch4 {
         }
         return Math.max(leftHeight, rightHeight) + 1 ;
     }
+
+    public static<Integer> boolean isBST(Node<Integer> node) {
+        if (node == null) {
+            return true;
+        }
+        return isBST(node, null, null);
+    }
+
+    private static<Integer> boolean isBST(Node<Integer> node, Node<Integer> min, Node<Integer> max) {
+        if (node == null) {
+            return true;
+        }
+
+        if ((min != null && node.getDataAsInt() <= min.getDataAsInt()) && (max != null && node.getDataAsInt() > max.getDataAsInt())) {
+            return false;
+        }
+
+        if(!isBST(node.getLeft(), min, node) || !isBST(node.getRight(), node, max)) {
+            return false;
+        }
+        return true;
+    }
 }
