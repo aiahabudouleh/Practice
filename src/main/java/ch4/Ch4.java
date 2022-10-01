@@ -122,14 +122,38 @@ public class Ch4 {
         if (node == null) {
             return true;
         }
-
-        if ((min != null && node.getDataAsInt() <= min.getDataAsInt()) && (max != null && node.getDataAsInt() > max.getDataAsInt())) {
+        if ((min != null && node.getDataAsInt() <= min.getDataAsInt())
+                && (max != null && node.getDataAsInt() > max.getDataAsInt())) {
             return false;
         }
-
         if(!isBST(node.getLeft(), min, node) || !isBST(node.getRight(), node, max)) {
             return false;
         }
         return true;
+    }
+
+    public static <T> Node<T> findSuccessor(Node<T> root) {
+        if (root.getRight() != null) {
+            //Most left of right
+            return getMostLeftNode(root.getRight());
+        } else {
+            Node<T> p = root.getParent();
+            Node<T> c = root;
+
+            while (p != null && p.getLeft() != c) {
+               c = p;
+               p = p.getParent();
+            }
+            return p;
+        }
+
+
+    }
+
+    private static <T> Node<T> getMostLeftNode(Node<T> cur) {
+        while (cur.getLeft() != null) {
+            cur = cur.getLeft();
+        }
+        return cur;
     }
 }

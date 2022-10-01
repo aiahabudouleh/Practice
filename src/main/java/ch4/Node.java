@@ -4,23 +4,31 @@ public class Node<T> {
 
     private Node<T> left;
     private Node<T> right;
+    private Node<T> parent;
     private T value;
 
     public Node(T value) {
         this.value = value;
     }
 
-    public Node(Node left, Node right) {
+    public Node(Node left, Node right, Node parent) {
         this.left = left;
         this.right = right;
+        this.parent = parent;
     }
 
     public void setRight(Node right) {
         this.right = right;
+        this.right.parent = this;
     }
 
     public void setLeft(Node left) {
         this.left = left;
+        this.left.parent = this;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 
     public Node getLeft() {
@@ -29,6 +37,10 @@ public class Node<T> {
 
     public Node getRight() {
         return this.right;
+    }
+
+    public Node getParent() {
+        return this.parent;
     }
 
     public T getData() {
