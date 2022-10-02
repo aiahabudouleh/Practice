@@ -1,5 +1,6 @@
 package ch4;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -155,5 +156,29 @@ public class Ch4 {
             cur = cur.getLeft();
         }
         return cur;
+    }
+
+    public static int [] topologicalSort(DAGraph<Integer> dAGraph) {
+        ArrayDeque<Integer> stack = new ArrayDeque<Integer>();
+        boolean[] vis = new boolean[dAGraph.getSize()];
+        dAGraph.getVertices().forEach(v -> {
+            if (!vis[v]) {
+                buildTopologicalSort(vis, dAGraph, stack, v);
+            }
+        });
+        return stack.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private static void buildTopologicalSort(boolean [] vis, DAGraph<Integer> graph, ArrayDeque<Integer> stack, Integer cur) {
+        if (vis[cur]) {
+            return;
+        }
+        vis[cur] = true;
+        graph.getAdj(cur).forEach(v -> {
+            if (!vis[v]) {
+                buildTopologicalSort(vis, graph, stack, v);
+            }
+        });
+        stack.push(cur);
     }
 }

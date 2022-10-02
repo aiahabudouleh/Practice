@@ -1,3 +1,5 @@
+import ch4.Ch4;
+import ch4.DAGraph;
 import ch4.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -69,5 +71,18 @@ public class Ch4Test {
         root.getRight().getRight().setRight(new Node(11));
 
         Assertions.assertEquals(new Node<Integer>(6), findSuccessor(root.getLeft().getRight()));
+    }
+
+    @Test
+    public void testTopologicalSort() {
+        DAGraph<Integer> graph = new DAGraph<>();
+        graph.addEdge(5, 0);
+        graph.addEdge(5, 2);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 1);
+        graph.addEdge(4, 1);
+        graph.addEdge(4, 0);
+
+        Ch4.topologicalSort(graph);
     }
 }
