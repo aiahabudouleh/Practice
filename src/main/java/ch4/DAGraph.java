@@ -31,7 +31,7 @@ public class DAGraph<T> {
         return values.size();
     }
 
-    public T getRandomVertix() {
+    public T getRandomVertic() {
         return adj.keySet().stream().findAny().get();
     }
 
