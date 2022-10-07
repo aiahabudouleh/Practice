@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import static java.util.Objects.isNull;
+
 public class Ch4 {
 
-    public static boolean RouteBetweenNode(Map<Integer, List<Integer>> graph, Integer src, Integer des) {
+    public static boolean routeBetweenNode(Map<Integer, List<Integer>> graph, Integer src, Integer des) {
         //BFS
         Queue<Integer> queue = new LinkedList<Integer>();
         Map<Integer, Boolean> vis = new HashMap<>();
@@ -180,5 +182,39 @@ public class Ch4 {
             }
         });
         stack.push(cur);
+    }
+
+    public static Node<Integer> findFirstCommonAncestor(Node<Integer> a, Node<Integer> b) {
+        int aDepth = getDepth(a);
+        int bDepth = getDepth(b);
+
+        int delta = aDepth - bDepth;
+        Node<Integer> first = delta > 0 ? b : a;
+        Node<Integer> second = delta > 0 ? a : b;
+        geUpBy(second, Math.abs(delta)); //both nodes are on the same depth
+
+        while (first != null && second != null && first != second) {
+            first = first.getParent();
+            second = second.getParent();
+        }
+
+        return isNull(first) || isNull(second) ? null : first ;
+    }
+
+    private static int getDepth(Node<Integer> a) {
+        int depth = 0 ;
+        while (a != null) {
+            depth++;
+            a = a.getParent();
+        }
+        return depth;
+    }
+
+    private static Node<Integer> geUpBy(Node<Integer> node, int depth) {
+        while (node != null && depth > 0) {
+            node = node.getParent();
+            depth--;
+        }
+        return node;
     }
 }
