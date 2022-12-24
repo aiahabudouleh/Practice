@@ -11,3 +11,9 @@ J
 src/test/java/Ch4Test.java,6\a\6a3a08197f61a46a81072b9c005c46f0a5075644
 N
 src/main/java/ch4/DAGraph.java,b\9\b9d475d37da7166e086877777ca9bede455083c9
+J
+src/main/java/ch4/Ch4.java,0\9\090792d39bb83410c44413c2777550f993b087f8
+J
+src/test/java/Ch2Test.java,2\1\2104583356182b1a7299f4062a5588387f293ccc
+J
+src/test/java/Ch1Test.java,e\e\eeacbf88345f95b643a2cae38e6294733496e989

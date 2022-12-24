@@ -155,42 +155,44 @@ public class Ch1 {
     }
 
     public static int[][] q7(int[][] matrix, int n) {
-        int top = 0, left = 0, bottom = n - 1, right = n - 1;
-        while (top <= bottom && left <= right) {
+            int len = matrix[0].length;
+            int top=0, bottom=len-1, left=0, right=len-1;
+            while (top <= bottom && left <= right) {
+                int [] tmp = new int[right - left + 1];
+                for (int i=left, j =0 ; i<=right ; ++i) {
+                    tmp[j++] = matrix[top][i];
+                }
 
-            //[top][left -> right]/tmp
-            int tmp[] = new int[right - left + 1];
-            for (int i=left; i<=right ; ++i) {
-                tmp[i] = matrix[top][i];
+                //[top][left -> right] = [bottom->top][left]
+                for(int i=left , j=bottom ; i<=right && j>=top; ++i, --j) {
+                    matrix[top][i] = matrix[j][left];
+                }
+
+
+                //[bottom->top][left] = [bottom][right->left]
+                for (int i=bottom, j= right ;  i>top && j >= left ; --j , --i) {
+                    matrix[i][left] = matrix[bottom][j];
+                }
+
+
+                //[bottom][right -> left]= [top -> bottom][right]
+                for (int i=right, j=top ; i>left && j<=bottom ; --i, ++j) {
+                    matrix[bottom][i] = matrix[j][right];
+                }
+
+
+                //[top -> bottom][right]
+                int j=0;
+                for (int i=top; i<=bottom; ++i) {
+                    matrix[i][right] = tmp[j++];
+                }
+
+                right--; left++; bottom--; top++;
+
+
             }
+            return matrix;
 
-            //[top][left -> right] = [bottom->top][left]
-            for (int i=left; i<=right; ++i) {
-                matrix[top][i] = matrix[n -i -1][left];
-            }
-            top++;
-
-            //[bottom -> top][left] = [bottom][right -> left]
-            for (int i=bottom; i>=top ; --i) {
-                matrix[i][left] = matrix[bottom][i];
-            }
-            left++;
-
-            //[bottom][right -> left] -> [top -> bottom][right]
-            for(int i=right, j=top ; i>=left && j<=bottom ; --i, ++j) {
-                matrix[bottom][i] = matrix[j][right];
-            }
-            bottom--;
-
-            //[top -> bottom][right] = [top][left -> right]/tmp
-            for (int i= top - 1, j= 0 ; i <= bottom + 1; ++i , j++) {
-                matrix[i][right] = tmp[j];
-            }
-            right--;
-
-        }
-
-        return matrix;
     }
 
     public static int[][] q8(int [][] matrix, int n, int m) {
